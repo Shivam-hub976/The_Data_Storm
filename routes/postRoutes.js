@@ -23,4 +23,23 @@ router.post('/', async (req, res) => {
     }
 });
 
+// GET /posts - retrieve all documents from atlas
+router.get('/', async (req, res) => {
+    try{
+        //Post.find() searches the database. Passing an empty object {} means "find everything"
+        const posts = await Post.find({});
+
+        res.status(200).json({
+            success: true,
+            count: posts.length,
+            data: posts
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Server Error : Unable to fetch posts'
+        });
+    }
+});
+
 module.exports = router;
