@@ -1,0 +1,27 @@
+// Force Node to use Google DNS for SRV lookups (bypasses ISP blocking)
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']);
+
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGO_URI)
+    .then(()=> {
+        console.log('Successfully connected to MongoDB Atlas!');
+
+        // Start the Server only after the DB connects
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Database connection failed:', error.message);
+    });
