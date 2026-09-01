@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Mount the post routes
+const postRoutes = require('./routes/postRoutes');
+app.use('/posts', postRoutes);
+
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
     .then(()=> {
