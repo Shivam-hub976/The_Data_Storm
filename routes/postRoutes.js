@@ -42,4 +42,34 @@ router.get('/', async (req, res) => {
     }
 });
 
+// DELETE /posts/:id - delete a single document by its ID
+router.delete('/:id', async (req, res) => {
+    try {
+        // req.params.id extracts the dynamic ID from the URL string
+        const deletedPost = await Post.findByIdAndDelete(req.params.id);
+
+        // If the database searches but cannot find a document with that ID, it returns null
+        // we catch that null and return a 404 Not Found Status
+        if (!deletedPost) {
+            return res.status(404).json({
+                success: false,
+                error: 'Post not found. It may have already been deleted.'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Post deleted successfully',
+            data: {} // Empty object returned when data deleted.
+        });
+     } catch(error) {
+            // If the ID is improperly formatted like too short, mongoose throws a cast error.
+            res.status(400).json({
+                success: false,
+                error: 'Invalid ID format'
+            });
+        
+    }
+});
+
 module.exports = router;
