@@ -24,10 +24,13 @@ router.post('/', async (req, res) => {
 });
 
 // GET /posts - retrieve all documents from atlas
+// Author details
 router.get('/', async (req, res) => {
     try{
         //Post.find() searches the database. Passing an empty object {} means "find everything"
-        const posts = await Post.find({});
+        // .populate() reaches into the User collection and replaces the raw id with the actual user object.
+        const posts = await Post.find({})
+            .populate('authorId', 'name email'); // The second argument limits the field we retrieve from the author document to just name and email, excluding the _id field.
 
         res.status(200).json({
             success: true,
