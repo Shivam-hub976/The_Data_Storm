@@ -16,6 +16,10 @@ app.use(express.json());
 const postRoutes = require('./routes/postRoutes');
 app.use('/posts', postRoutes);
 
+// Mount the user routes
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
+
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
     .then(()=> {
