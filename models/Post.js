@@ -11,6 +11,14 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    //The Relationship between Post and User
+    authorId: {
+        type: mongoose.Schema.Types.ObjectId, //The type of the field is an ObjectId
+        ref: 'User', //This Must match the name of the model exported in User.js
+        required: true
+    },
+    
     createdAt: {
         type: Date,
         default: Date.now //Automates the timestamp so the frontend doesn't have to send it
