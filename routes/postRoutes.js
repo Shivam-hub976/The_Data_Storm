@@ -45,6 +45,31 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET /posts/top/recent - Aggregation: top 3 Most recent posts
+router.get('/top/recent', async (req, res) => {
+    try {
+        // .find({}) gets everything
+        // .sort({ createdAt: -1}) orders them by time. -1 means desecending newest first
+        // .limit(3) slices off everything after the first 3 results
+        // .populate() hydrates the author details just like our main GET route
+        const topPosts = await Post.find({})
+            .sort({ createdAt: -1 })
+            .limit(3)
+            .populate('authorId', 'name email');
+
+        res.status(200).json({
+            success: true,
+            count: topPosts.length,
+            data: topPosts
+        });    
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                error: 'Server Error : Unable to fetch top posts'
+            });
+        }
+});
+
 // DELETE /posts/:id - delete a single document by its ID
 router.delete('/:id', async (req, res) => {
     try {
