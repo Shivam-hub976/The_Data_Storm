@@ -5,12 +5,15 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount the post routes
 const postRoutes = require('./routes/postRoutes');

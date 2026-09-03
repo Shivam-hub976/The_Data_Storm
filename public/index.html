@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Data Storm API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #333;
+        }
+
+        h1 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+
+        ul {
+            background: #f9f9f9;
+            padding: 20px 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        .method {
+            font-weight: bold;
+            color: #0056b3;
+            display: inline-block;
+            width: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>The Data Storm API</h1>
+    <p>System Status: <span class="status">Online</span></p>
+
+    <h2>API Endpoints</h2>
+    <ul>
+        <li><span class="method">POST</span> /users</li>
+        <li><span class="method">POST</span> /posts</li>
+        <li><span class="method">GET</span> /posts</li>
+        <li><span class="method">GET</span> /posts/top/recent</li>
+        <li><span class="method">DELETE</span> /posts/:id</li>
+    </ul>
+</body>
+
+</html>
